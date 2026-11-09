@@ -1,0 +1,269 @@
+/* ==========================================================================
+   Design tokens — the only place design values live.
+   Source: Figma Foundations (3:34) + PROMPT §10.
+   ========================================================================== */
+
+:root {
+  /* ---- Colour: base ---- */
+  --base-midnight: #0D0A12;
+  --base-night: #18121F;
+  --base-smoke: #2A2230;
+
+  /* ---- Colour: candlelight ---- */
+  --candle-amber: #E8A64A;
+  --candle-ember: #B8642A;
+  --candle-flame-core: #FFF2C4;
+  --candle-wax-light: #EADBB8;
+  --candle-wax-shadow: #9E8660;
+
+  /* ---- Colour: gold ---- */
+  --gold-antique: #C9A35B;
+  --gold-light: #EBD49B;
+  --gold-deep: #8A6420;            /* focus ring on light surfaces */
+
+  /* ---- Colour: parchment ---- */
+  --parchment-light: #F1E4C3;
+  --parchment-mid: #E2CC9C;
+  --parchment-edge: #B8935C;
+  --parchment-fold: #E6D2A6;
+  --parchment-crease: rgba(140, 108, 66, 0.35);
+  --parchment-crease-strong: rgba(140, 108, 66, 0.4);
+
+  /* ---- Colour: ink ---- */
+  --ink-brown: #2E2015;
+  --ink-emerald: #1F4A36;
+  --ink-faded: #6B5440;
+  --ink-faded-strong: #594332;  /* faded ink that still reads on parchment stains */
+
+  /* ---- Colour: seal ---- */
+  --seal-burgundy: #7A1F24;
+  --seal-burgundy-light: #93262C;
+  --seal-burgundy-dark: #5E161B;
+  --seal-rim-dark: #5A1418;
+  --seal-rim-light: rgba(163, 56, 60, 0.7);
+
+  /* ---- Colour: envelope ---- */
+  --envelope-top: #EAD8B0;
+  --envelope-bottom: #C8AA74;
+
+  /* ---- Colour: atmosphere ---- */
+  --atmos-glow-landing: rgba(58, 36, 51, 0.9);
+  --atmos-glow-letter: rgba(44, 30, 62, 0.85);
+  --atmos-glow-transparent: rgba(13, 10, 18, 0);
+  --vignette: rgba(0, 0, 0, 0.65);
+  --shadow-deep: rgba(0, 0, 0, 0.6);
+  --shadow-mid: rgba(0, 0, 0, 0.5);
+  --shadow-seal: rgba(0, 0, 0, 0.45);
+  --glow-amber-soft: rgba(232, 166, 74, 0.18);
+  --glow-amber: rgba(232, 166, 74, 0.35);
+  --parchment-sheen: rgba(235, 212, 155, 0.7);
+  --parchment-sheen-fade: rgba(241, 228, 195, 0.02);
+
+  --atmos-glow-question: rgba(74, 46, 42, 0.8);
+  --atmos-glow-loading: rgba(52, 32, 56, 0.85);
+  --atmos-glow-error: rgba(62, 30, 52, 0.85);
+  --dim: rgba(13, 10, 18, 0.72);
+
+  /* ---- Colour: question sheet + answer cards ---- */
+  --sheet-top: #F6EBCF;
+  --sheet-bottom: #E2C995;
+  --sheet-inner-shadow: rgba(140, 108, 66, 0.35);
+  --card-selected-top: #FBF1D6;
+  --card-selected-bottom: #EED9A8;
+  --glow-select: rgba(232, 166, 74, 0.45);
+  --glow-progress: rgba(232, 166, 74, 0.6);
+
+  /* ---- Colour: result ---- */
+  --trait-top: #F3E6C6;
+  --trait-bottom: #DCC291;
+  --shadow-trait: rgba(0, 0, 0, 0.4);
+
+  /* ---- Colour: sorting orbs (house colours, fixed) ---- */
+  --orb-gryffindor: rgba(122, 28, 36, 0.9);
+  --orb-hufflepuff: rgba(201, 150, 46, 0.9);
+  --orb-ravenclaw: rgba(31, 47, 92, 0.9);
+  --orb-slytherin: rgba(29, 74, 54, 0.9);
+  --hat-glow: rgba(232, 166, 74, 0.35);
+
+  /* ---- House (defaults; swapped by [data-house]) ---- */
+  --house: var(--seal-burgundy);
+  --house-accent: var(--gold-antique);
+  --house-text: var(--gold-antique);     /* house colour that reads on midnight */
+  --house-ink: var(--seal-burgundy);     /* house colour that reads on parchment */
+  --house-glow: rgba(122, 31, 36, 0.5);
+
+  /* ---- Type families ---- */
+  --font-display: "Cinzel Decorative", Georgia, serif;
+  --font-caps: "Cinzel", Georgia, serif;
+  --font-whisper: "Cormorant Garamond", Georgia, serif;
+  --font-body: "EB Garamond", Georgia, serif;
+
+  /* ---- Type scale ---- */
+  --fs-display: 64px;   --lh-display: 1.1;
+  --fs-display-l: 44px; --lh-display-l: 1.15;
+  --fs-question: 40px;  --lh-question: 1.2;
+  --fs-whisper: 32px;   --lh-whisper: 1.3;
+  --fs-address-name: 30px;
+  --fs-signature: 26px;
+  --fs-address-to: 24px;
+  --fs-body-l: 22px;    --lh-body: 1.5;
+  --fs-body-m: 18px;
+  --fs-button: 16px;    --ls-button: 0.1em;
+  --fs-caps: 13px;      --lh-caps: 1.3; --ls-caps: 0.14em;
+  --fs-footer: 13px;
+  --fs-monogram: 30px;  --ls-monogram: -0.04em;
+
+  /* ---- Spacing ---- */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --gutter: 16px;
+
+  /* ---- Layout ---- */
+  --stage-width: 1440px;
+  --stage-height: 1024px;
+  --heading-top: 150px;
+  --envelope-w: 720px;
+  --envelope-h: 440px;
+  --envelope-gap: 79px;     /* heading bottom (251) → envelope top (330) */
+  --seal-size: 112px;
+  --letter-w: 615px;
+  --letter-h: 854px;
+  --letter-top: 36px;
+  --letter-pad-x: 82px;
+  --letter-content-w: 424px;
+  --footer-bottom: 24px;
+  --target-min: 44px;
+
+  --bar-top: 60px;
+  --bar-x: 120px;
+  --sheet-w: 900px;
+  --sheet-offset: 142px;    /* bar bottom → sheet top (235 in Figma) */
+  --sheet-pad-y: 56px;
+  --sheet-pad-x: 80px;
+  --badge: 40px;
+  --seg-w: 28px;
+  --seg-h: 4px;
+  --seg-gap: 6px;
+
+  --hat-w: 440px;
+  --hat-top: 170px;
+  --hat-glow-w: 760px;
+  --hat-glow-h: 620px;
+  --orb: 240px;
+  --orb-blur: 20px;
+  --orb-ring-drop: 170px;   /* ring centre sits below the hat centre */
+  --hat-glow-drop: 80px;
+  --error-hat-w: 300px;
+  --error-hat-tilt: -12deg;
+
+  --crest-col: 360px;
+  --crest-size: 380px;
+  --crest-glow: 520px;
+  --result-col: 700px;
+  --result-gap: 70px;
+  --result-top: 198px;
+
+  --dialog-w: 560px;
+  --toast-bottom: 48px;
+  --loading-top: 330px;
+  --solo-candle: 120px;
+  --fs-dialog-title: 36px;
+  --fs-sorting-line: 40px;
+  --fs-trait-label: 11px;
+  --fs-trait: 16px;
+  --toast-icon: 20px;
+
+  /* ---- Radii & borders ---- */
+  --radius-s: 4px;
+  --radius-m: 6px;
+  --radius-card: 10px;
+  --radius-pill: 999px;
+  --border-select: 2px;
+  --border-hair: 1px;
+  --border-button: 1.5px;
+  --focus-width: 3px;
+  --focus-offset: 3px;
+  --focus-ring: var(--gold-antique);
+
+  /* ---- Shadows ---- */
+  --shadow-envelope: 0 0 80px 0 var(--glow-amber-soft), 0 24px 48px 0 var(--shadow-deep);
+  --shadow-letter: 0 0 60px 0 var(--glow-amber-soft), 0 24px 48px 0 var(--shadow-deep);
+  --shadow-button: 0 6px 12px 0 var(--shadow-mid), 0 0 24px 0 var(--glow-amber);
+  --shadow-seal: drop-shadow(0 6px 5px var(--shadow-seal));
+  --shadow-sheet: 0 24px 56px 0 rgba(0, 0, 0, 0.55);
+  --shadow-sheet-inner: inset 0 0 40px 0 var(--sheet-inner-shadow);
+  --shadow-select: 0 0 14px 0 var(--glow-select);
+  --shadow-progress: 0 0 6px 0 var(--glow-progress);
+  --shadow-trait-card: 0 10px 20px 0 var(--shadow-trait);
+  --shadow-crest: 0 16px 30px 0 var(--shadow-mid);
+  --shadow-hat: drop-shadow(0 20px 30px var(--shadow-mid));
+  --shadow-dialog: 0 24px 64px 0 var(--shadow-deep);
+  --shadow-toast: 0 10px 24px 0 var(--shadow-mid);
+
+  /* ---- Opacity ---- */
+  --footer-opacity: 0.7;   /* Figma 0.55 → raised for WCAG AA (see README) */
+
+  /* ---- Motion ---- */
+  --dur-select: 150ms;
+  --dur-screen: 300ms;
+  --dur-reveal: 400ms;
+  --dur-toast: 200ms;
+  --dur-advance: 300ms;
+  --candle-float: -6px;
+  --candle-cycle-1: 4s;
+  --candle-cycle-2: 4.6s;
+  --candle-cycle-3: 5.2s;
+  --candle-cycle-4: 6s;
+  --candle-delay-1: -1.3s;   /* negative delays keep candles out of sync */
+  --candle-delay-2: -3.1s;
+  --candle-delay-3: -0.4s;
+  --candle-delay-4: -2.2s;
+  --candle-delay-5: -4.7s;
+  --candle-delay-6: -2.9s;
+  --orb-cycle: 12s;
+  --dur-sorting: 3000ms;    /* whole sorting moment before the result */
+  --dur-type: 1500ms;       /* sorting line types out */
+  --type-steps: 36;
+  --dur-dot: 300ms;
+  --dot-delay-1: 1500ms;
+  --dot-delay-2: 1800ms;
+  --dot-delay-3: 2100ms;
+  --toast-hold: 3000ms;
+  --toast-rise: 8px;
+  --ease-std: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --reveal-drop: 16px;
+}
+
+/* ---- House themes ---- */
+/* --house-text / --house-ink are contrast-safe stand-ins (see README). */
+[data-house="gryffindor"] {
+  --house: #7A1C24; --house-accent: #D9A441;
+  --house-text: #D9A441; --house-ink: #7A1C24; --house-glow: rgba(122, 28, 36, 0.55);
+}
+[data-house="hufflepuff"] {
+  --house: #C9962E; --house-accent: #2B2118;
+  --house-text: #D6A43F; --house-ink: #2B2118; --house-glow: rgba(201, 150, 46, 0.32);
+}
+[data-house="ravenclaw"] {
+  --house: #1F2F5C; --house-accent: #B07D4F;
+  --house-text: #C08D5F; --house-ink: #1F2F5C; --house-glow: rgba(31, 47, 92, 0.75);
+}
+[data-house="slytherin"] {
+  --house: #1D4A36; --house-accent: #B9BEC2;
+  --house-text: #B9BEC2; --house-ink: #1D4A36; --house-glow: rgba(29, 74, 54, 0.7);
+}
+
+/* ---- Surfaces that need a darker focus ring ---- */
+.surface-light { --focus-ring: var(--gold-deep); }

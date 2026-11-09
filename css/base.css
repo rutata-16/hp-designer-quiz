@@ -1,0 +1,142 @@
+/* Body, stage, atmosphere layers, type primitives. */
+
+html {
+  background: var(--base-midnight);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--base-midnight);
+  color: var(--parchment-light);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  overflow-x: hidden;
+}
+
+/* ---- Atmosphere (fixed, full viewport) ---- */
+
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.atmosphere__glow,
+.atmosphere__sky,
+.atmosphere__vignette {
+  position: absolute;
+  inset: 0;
+}
+
+.atmosphere__glow {
+  --atmos-glow: var(--atmos-glow-landing);
+  background: radial-gradient(50% 50% at 50% 50%, var(--atmos-glow) 0%, var(--atmos-glow-transparent) 100%);
+  transition: background var(--dur-screen) var(--ease-std);
+}
+
+body[data-atmosphere="letter"] .atmosphere__glow   { --atmos-glow: var(--atmos-glow-letter); }
+body[data-atmosphere="question"] .atmosphere__glow { --atmos-glow: var(--atmos-glow-question); }
+body[data-atmosphere="sorting"] .atmosphere__glow  { --atmos-glow: var(--atmos-glow-transparent); }
+body[data-atmosphere="result"] .atmosphere__glow   { --atmos-glow: var(--house-glow); }
+body[data-atmosphere="loading"] .atmosphere__glow  { --atmos-glow: var(--atmos-glow-loading); }
+body[data-atmosphere="error"] .atmosphere__glow    { --atmos-glow: var(--atmos-glow-error); }
+
+.atmosphere__vignette {
+  background: radial-gradient(50% 50% at 50% 50%, transparent 55%, var(--vignette) 100%);
+}
+
+.starfield {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+.star { fill: var(--gold-light); }
+.star--dim { opacity: 0.55; }
+
+/* ---- Stage: centred 1440 reference frame ---- */
+
+.stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--stage-width);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+}
+
+.app {
+  position: relative;
+  z-index: 2;
+  flex: 1 0 auto;
+  display: grid;
+}
+
+/* Screens stack in one grid cell so they can crossfade in place. */
+.screen {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+/* ---- Disclaimer footer ---- */
+
+.disclaimer {
+  position: relative;
+  z-index: 1;
+  width: min(900px, 100% - 2 * var(--gutter));
+  margin: var(--space-24) auto 0;
+  padding-bottom: var(--footer-bottom);
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: var(--fs-footer);
+  line-height: var(--lh-body);
+  color: var(--parchment-mid);
+  opacity: var(--footer-opacity);
+  text-align: center;
+}
+
+/* ---- Type primitives ---- */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  color: var(--gold-light);
+}
+
+.whisper {
+  font-family: var(--font-whisper);
+  font-weight: 500;
+  font-style: italic;
+  font-size: var(--fs-whisper);
+  line-height: var(--lh-whisper);
+}
+
+.caps-label {
+  font-family: var(--font-caps);
+  font-weight: 700;
+  font-size: var(--fs-caps);
+  line-height: var(--lh-caps);
+  letter-spacing: var(--ls-caps);
+  color: var(--gold-antique);
+}
+
+/* ---- Focus ---- */
+
+:focus { outline: none; }
+
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+[data-screen-heading]:focus,
+[data-screen-heading]:focus-visible {
+  outline: none;
+}

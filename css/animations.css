@@ -1,0 +1,141 @@
+/* Every keyframe in the project, and the rules that apply them. Nothing else.
+   Allowed motion only (PROMPT §5). Reduced motion is handled in reset.css. */
+
+/* ---- Candles: gentle hover, staggered, never in sync ---- */
+
+@keyframes candle-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(var(--candle-float)); }
+}
+
+.candle {
+  animation: candle-float var(--candle-cycle-4) ease-in-out infinite;
+}
+
+.candles .candle:nth-child(4n + 1) { animation-duration: var(--candle-cycle-1); animation-delay: var(--candle-delay-1); }
+.candles .candle:nth-child(4n + 2) { animation-duration: var(--candle-cycle-3); animation-delay: var(--candle-delay-2); }
+.candles .candle:nth-child(4n + 3) { animation-duration: var(--candle-cycle-2); animation-delay: var(--candle-delay-3); }
+.candles .candle:nth-child(4n + 4) { animation-duration: var(--candle-cycle-4); animation-delay: var(--candle-delay-4); }
+.candles .candle:nth-child(5)      { animation-delay: var(--candle-delay-5); }
+.candles .candle:nth-child(7)      { animation-delay: var(--candle-delay-6); }
+
+/* ---- Screen changes: 300ms crossfade ---- */
+
+@keyframes screen-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes screen-out { from { opacity: 1; } to { opacity: 0; } }
+
+.screen.is-entering {
+  animation: screen-in var(--dur-screen) var(--ease-std) both;
+}
+
+.screen.is-leaving {
+  animation: screen-out var(--dur-screen) var(--ease-std) both;
+  pointer-events: none;
+}
+
+/* ---- Envelope → letter: envelope fades down, letter fades in (400ms) ---- */
+
+@keyframes reveal-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(var(--reveal-drop)); }
+}
+
+.screen.is-leaving-reveal {
+  animation: reveal-out var(--dur-reveal) var(--ease-std) both;
+  pointer-events: none;
+}
+
+.screen.is-leaving-reveal + .screen.is-entering {
+  animation-duration: var(--dur-reveal);
+}
+
+/* ---- Candle layer follows the screen fade ---- */
+
+.candles {
+  transition: opacity var(--dur-screen) var(--ease-std), visibility var(--dur-screen);
+}
+
+/* ---- Answer selection: state change over 150ms ---- */
+
+.answer-card,
+.answer-card__badge {
+  transition:
+    background-color var(--dur-select) var(--ease-std),
+    border-color var(--dur-select) var(--ease-std),
+    box-shadow var(--dur-select) var(--ease-std),
+    color var(--dur-select) var(--ease-std);
+}
+
+/* ---- Sorting: orb ring turns once every 12s; hat stays still ---- */
+
+@keyframes orb-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.orb-ring {
+  animation: orb-spin var(--orb-cycle) linear infinite;
+}
+
+/* ---- Sorting: line types out, then the dots fade in one by one ---- */
+
+@keyframes type-out {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+.sorting__line {
+  animation: type-out var(--dur-type) steps(var(--type-steps), end) both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.thinking-dots__dot {
+  animation: fade-in var(--dur-dot) var(--ease-std) both;
+}
+
+.thinking-dots__dot:nth-child(1) { animation-delay: var(--dot-delay-1); }
+.thinking-dots__dot:nth-child(2) { animation-delay: var(--dot-delay-2); }
+.thinking-dots__dot:nth-child(3) { animation-delay: var(--dot-delay-3); }
+
+/* ---- Result crest: fades in over the shield outline when loaded ---- */
+
+.crest.is-loaded:not(.is-instant) .crest__image {
+  animation: fade-in var(--dur-screen) var(--ease-std) both;
+}
+
+/* ---- Toasts: fade + rise 8px in 200ms; fade out ---- */
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(var(--toast-rise)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toast-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.toast {
+  animation: toast-in var(--dur-toast) var(--ease-std) both;
+}
+
+.toast.is-hiding {
+  animation: toast-out var(--dur-toast) var(--ease-std) both;
+}
+
+/* ---- Welcome back: dim layer and card fade in (200ms) ---- */
+
+.dialog__dim,
+.dialog__card {
+  animation: fade-in var(--dur-toast) var(--ease-std) both;
+}
+
+/* ---- Slow-load copy fades in once ---- */
+
+.loading__content--fade {
+  animation: fade-in var(--dur-reveal) var(--ease-std) both;
+}

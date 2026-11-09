@@ -1,0 +1,371 @@
+/* Per-screen layouts. Composes components; never redefines them. */
+
+/* ==========================================================================
+   01 · The letter arrives
+   ========================================================================== */
+
+.screen--arrives {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--heading-top) var(--gutter) 0;
+}
+
+/* Wrapper that the welcome-back dialog makes inert; keeps everything centred. */
+.arrives__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.arrives__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-14);
+  text-align: center;
+}
+
+.arrives__title {
+  white-space: nowrap;
+}
+
+.screen--arrives .envelope {
+  margin-top: var(--envelope-gap);
+}
+
+.arrives__hint {
+  margin-top: var(--space-40);
+  text-align: center;
+  color: var(--parchment-light);
+}
+
+/* ==========================================================================
+   02 · The letter, opened
+   ========================================================================== */
+
+.screen--opened {
+  display: flex;
+  justify-content: center;
+  padding: var(--letter-top) var(--gutter) 0;
+}
+
+/* ==========================================================================
+   03 · Question
+   ========================================================================== */
+
+.screen--question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--bar-top) var(--gutter) 0;
+}
+
+.question__bar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.question__back {
+  position: absolute;
+  left: calc(var(--bar-x) - var(--space-16));
+  top: calc(var(--space-4) - var(--space-8));
+}
+
+.question-sheet {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  width: min(var(--sheet-w), 100%);
+  margin-top: var(--sheet-offset);
+  padding: var(--sheet-pad-y) var(--sheet-pad-x);
+  background: linear-gradient(162deg, var(--sheet-top) 0%, var(--sheet-bottom) 76.9%);
+  border: var(--border-hair) solid var(--parchment-edge);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-sheet), var(--shadow-sheet-inner);
+}
+
+.question-sheet__prompt {
+  font-family: var(--font-whisper);
+  font-weight: 600;
+  font-size: var(--fs-question);
+  line-height: var(--lh-question);
+  color: var(--ink-brown);
+  text-align: center;
+}
+
+/* ==========================================================================
+   04 · Sorting moment
+   ========================================================================== */
+
+.screen--sorting {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--hat-top) var(--gutter) 0;
+  overflow: hidden;
+}
+
+.sorting__visual {
+  position: relative;
+}
+
+/* Zero-size anchor at the hat's centre; orbs and glow hang off it. */
+.sorting__stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+}
+
+.sorting__stage .orb-ring {
+  top: var(--orb-ring-drop);
+}
+
+.sorting__glow {
+  position: absolute;
+  left: calc(var(--hat-glow-w) / -2);
+  top: calc(var(--hat-glow-h) / -2 + var(--hat-glow-drop));
+  width: var(--hat-glow-w);
+  height: var(--hat-glow-h);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--hat-glow), transparent);
+}
+
+.sorting__hat {
+  position: relative;
+  width: min(var(--hat-w), 80vw);
+  filter: var(--shadow-hat);
+}
+
+.sorting__speaks {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+  margin-top: var(--space-48);
+  text-align: center;
+}
+
+.sorting__line {
+  font-family: var(--font-whisper);
+  font-weight: 500;
+  font-style: italic;
+  font-size: var(--fs-sorting-line);
+  line-height: var(--lh-whisper);
+  color: var(--parchment-light);
+}
+
+.sorting__line-slot {
+  min-height: calc(var(--fs-sorting-line) * var(--lh-whisper));
+}
+
+/* ==========================================================================
+   05 · Result
+   ========================================================================== */
+
+.screen--result {
+  display: grid;
+  grid-template-columns: var(--crest-col) minmax(0, var(--result-col));
+  justify-content: center;
+  align-items: center;
+  column-gap: var(--result-gap);
+  padding: var(--result-top) var(--gutter) 0;
+}
+
+.result__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.result__eyebrow {
+  color: var(--house-text);
+}
+
+.result__subheading {
+  color: var(--parchment-light);
+}
+
+.result__description {
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  color: var(--parchment-mid);
+}
+
+.result__traits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-16);
+}
+
+.result__actions {
+  padding-top: var(--space-8);
+}
+
+/* ==========================================================================
+   E1a / E1b · Slow load
+   ========================================================================== */
+
+.screen--loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-40);
+  padding: var(--loading-top) var(--gutter) 0;
+  text-align: center;
+}
+
+.loading__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.loading__title {
+  color: var(--parchment-light);
+}
+
+.loading__body {
+  color: var(--parchment-mid);
+}
+
+/* ==========================================================================
+   E5 · Something went wrong
+   ========================================================================== */
+
+.screen--error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-24);
+  padding: var(--space-80) var(--gutter) 0;
+  padding-top: calc(var(--hat-top) + var(--space-20));
+  text-align: center;
+}
+
+.error__hat {
+  width: min(var(--error-hat-w), 70vw);
+  margin-bottom: var(--space-24);
+  transform: rotate(var(--error-hat-tilt));
+  filter: var(--shadow-hat);
+}
+
+.error__title {
+  font-family: var(--font-whisper);
+  font-weight: 600;
+  font-size: var(--fs-question);
+  line-height: var(--lh-question);
+  color: var(--parchment-light);
+}
+
+.error__body {
+  max-width: 40em;
+  font-size: var(--fs-body-m);
+  color: var(--parchment-mid);
+}
+
+.screen--error .actions {
+  margin-top: var(--space-8);
+}
+
+/* ==========================================================================
+   Below 1024px: degrade gracefully (no separate mobile design)
+   ========================================================================== */
+
+@media (max-width: 1023px) {
+  .candles .candle:nth-child(n + 5) { display: none; }
+
+  .screen--arrives { padding-top: var(--space-80); }
+
+  .arrives__title {
+    white-space: normal;
+    font-size: min(var(--fs-display), 9vw);
+  }
+
+  .screen--arrives .envelope { margin-top: var(--space-48); }
+
+  /* Question: sheet goes full width with a gutter; Back joins the flow. */
+  .question__bar {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-16);
+  }
+
+  .question__back {
+    position: static;
+    align-self: flex-start;
+  }
+
+  .question-sheet { margin-top: var(--space-40); }
+
+  /* Result: crest stacks above the content. */
+  .screen--result {
+    grid-template-columns: minmax(0, var(--result-col));
+    row-gap: var(--space-40);
+    padding-top: var(--space-64);
+  }
+
+  .crest__frame { width: min(var(--crest-size), 70vw); }
+  .crest__glow { width: min(var(--crest-glow), 100vw); height: min(var(--crest-glow), 100vw); }
+
+  .result__headline { font-size: min(var(--fs-display), 10vw); }
+
+  .screen--sorting { padding-top: var(--space-80); }
+  .screen--loading { padding-top: var(--space-80); }
+  .screen--error { padding-top: var(--space-80); }
+}
+
+@media (max-width: 640px) {
+  .candles .candle:nth-child(n + 3) { display: none; }
+  .candles .candle:nth-child(1) { --w: 36px; left: 3%; top: var(--space-16); }
+  .candles .candle:nth-child(2) { --w: 32px; left: auto; right: 3%; top: var(--space-24); }
+
+  .screen--arrives { padding-top: var(--space-80); }
+
+  .arrives__hint { font-size: var(--fs-address-to); }
+
+  .letter {
+    min-height: 0;
+    padding: var(--space-48) var(--space-24);
+  }
+
+  .letter__greeting,
+  .letter__body { font-size: var(--fs-body-m); }
+
+  .question-sheet {
+    gap: var(--space-24);
+    padding: var(--space-32) var(--space-20);
+  }
+
+  .question-sheet__prompt { font-size: var(--fs-signature); }
+
+  .answer-card {
+    gap: var(--space-14);
+    padding: var(--space-14) var(--space-16);
+  }
+
+  .answer-card__label { font-size: var(--fs-body-m); }
+
+  .progress__segments { --seg-w: 18px; --seg-gap: 4px; }
+
+  .result__traits { grid-template-columns: minmax(0, 1fr); }
+
+  .result__subheading { font-size: var(--fs-address-to); }
+
+  .sorting__line { font-size: var(--fs-address-to); }
+
+  .error__title { font-size: var(--fs-signature); }
+
+  .dialog__title { font-size: var(--fs-signature); }
+
+  .dialog__card { padding: var(--space-32) var(--space-20); }
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <path fill="#7A1F24" d="M256 18c64 9 82-9 128 27 55 28 73 64 91 110 27 55 9 91 18 146-9 64-37 101-82 137-46 37-91 46-146 55-64 9-110-18-155-46-55-37-73-82-91-137-9-64 9-100 9-146 18-64 64-100 110-128 46-18 73-27 118-18z"/>
+  <circle cx="256" cy="256" r="165" fill="none" stroke="#5A1418" stroke-width="12"/>
+  <circle cx="256" cy="256" r="138" fill="none" stroke="#A3383C" stroke-opacity="0.7" stroke-width="5"/>
+  <text x="256" y="300" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="140" fill="#C9A35B" letter-spacing="-6">DS</text>
+</svg>

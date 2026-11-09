@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import PIL; print\\(PIL.__version__\\)\")",
+      "mcp__fdbc5956-13d7-49a6-aa54-c9087cac62fe__get_metadata",
+      "mcp__fdbc5956-13d7-49a6-aa54-c9087cac62fe__get_design_context",
+      "Bash(python3 -m http.server 8123)",
+      "Bash(curl -sfL https://www.figma.com/api/mcp/asset/17f5f368-31cf-443c-9efa-c7233ea4680d.svg)",
+      "Bash(curl -sfL https://www.figma.com/api/mcp/asset/3a12af18-bc31-4858-888c-99d13c7f124c.svg)",
+      "mcp__fdbc5956-13d7-49a6-aa54-c9087cac62fe__get_screenshot",
+      "Bash(curl -sfL -o e1b.png \"https://www.figma.com/api/mcp/asset/f1bb0fb9-82c1-4145-84e5-3365f5b118ae.png\")",
+      "Bash(sed -i '' 's/padding: var\\(--space-20\\) 28px var\\(--space-20\\) var\\(--space-24\\);/padding: var\\(--space-20\\) var\\(--space-28\\) var\\(--space-20\\) var\\(--space-24\\);/; s/^  gap: 10px;$/  gap: var\\(--space-10\\);/' components.css)",
+      "Bash(sed -i '' 's/^  --space-24: 24px;$/  --space-24: 24px;\\\\n  --space-28: 28px;/' variables.css)",
+      "Bash(python3 -)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8123/index.html)",
+      "Bash(sed -i '' '/  text-wrap: balance;/d' css/screens.css)",
+      "Bash(grep -nE '#[0-9A-Fa-f]{3,6}\\\\b|rgba?\\\\\\(' css/components.css css/screens.css css/base.css css/animations.css)",
+      "Bash(:)",
+      "Bash(sed -i '' 's/  .arrives__hint-title { font-size: var\\(--fs-address-to\\); }/  .arrives__hint { font-size: var\\(--fs-address-to\\); }/' css/screens.css)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8123/index.html)"
+    ]
+  }
+}
