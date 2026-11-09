@@ -146,7 +146,7 @@ export function question({ index = 0 } = {}) {
 // ==========================================================================
 
 export function sorting() {
-  const house = scoreAnswers(store.answers());
+  const house = scoreAnswers(store.answers(), store.questions());
   const line = SORTING_LINES[Math.floor(Math.random() * SORTING_LINES.length)];
   const c = COPY.sorting;
 
