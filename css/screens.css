@@ -368,4 +368,14 @@
   .dialog__title { font-size: var(--fs-signature); }
 
   .dialog__card { padding: var(--space-32) var(--space-20); }
+
+    .dialog__card--art {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-32) var(--space-20);
+  }
+  .dialog__card--art .dialog__content { align-items: center; }
+  .dialog__card--art .dialog__list { text-align: left; }
+  .dialog__actions { justify-content: center; }
+  .dialog__art { width: 140px; }
 }

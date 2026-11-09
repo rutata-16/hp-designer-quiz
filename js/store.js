@@ -1,11 +1,13 @@
 // Quiz progress, backed by sessionStorage with a silent in-memory fallback.
 
-import { TOTAL_QUESTIONS } from './data.js';
+import { TOTAL_QUESTIONS, QUESTION_POOL } from './data.js';
 
-const KEY = 'designers-sorting-hat:v1';
+const KEY = 'designers-sorting-hat:v2';
 const RESUME_KEY = 'designers-sorting-hat:resume';
 
-const blank = () => ({ answers: Array(TOTAL_QUESTIONS).fill(null), finished: false });
+// picks[slot] is 0 (variant A) or 1 (variant B), chosen at random per quiz.
+const randomPicks = () => QUESTION_POOL.map(() => (Math.random() < 0.5 ? 0 : 1));
+const blank = () => ({ answers: Array(TOTAL_QUESTIONS).fill(null), picks: randomPicks(), finished: false });
 
 let memory = blank();
 let storageOk = true;
@@ -15,10 +17,14 @@ function read() {
     const raw = window.sessionStorage.getItem(KEY);
     if (!raw) return blank();
     const parsed = JSON.parse(raw);
-    if (!parsed || !Array.isArray(parsed.answers) || parsed.answers.length !== TOTAL_QUESTIONS) {
+        if (
+      !parsed
+      || !Array.isArray(parsed.answers) || parsed.answers.length !== TOTAL_QUESTIONS
+      || !Array.isArray(parsed.picks) || parsed.picks.length !== TOTAL_QUESTIONS
+    ) {
       return blank();
     }
-    return { answers: parsed.answers, finished: Boolean(parsed.finished) };
+    return { answers: parsed.answers, picks: parsed.picks, finished: Boolean(parsed.finished) };
   } catch {
     storageOk = false;
     return memory;
@@ -43,10 +49,14 @@ export const store = {
   answerAt(index) {
     return memory.answers[index] ?? null;
   },
-  setAnswer(index, answerId) {
+    setAnswer(index, answerId) {
     const answers = [...memory.answers];
     answers[index] = answerId;
-    write({ answers, finished: false });
+    write({ ...memory, answers, finished: false });
+  },
+  /** The 12 questions chosen for this quiz, in slot order. */
+  questions() {
+    return QUESTION_POOL.map((pair, slot) => pair[memory.picks[slot]]);
   },
   answeredCount() {
     return memory.answers.filter(Boolean).length;

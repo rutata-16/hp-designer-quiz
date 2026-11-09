@@ -1,6 +1,6 @@
 // Scoring tests, rendered by tests.html.
 
-import { QUESTIONS, HOUSES, RESULTS, TOTAL_QUESTIONS } from './data.js';
+import { QUESTIONS, QUESTIONS_B, QUESTION_POOL, HOUSES, RESULTS, TOTAL_QUESTIONS } from './data.js';
 import { scoreAnswers, tally } from './scoring.js';
 
 const results = [];
@@ -150,6 +150,59 @@ test('Random answer sets are deterministic and always return a valid house', () 
     assert(HOUSES.includes(a), `invalid house ${a}`);
     equal(scoreAnswers(set), a, 'repeat');
   }
+});
+
+// ---- Question pool (variant B) ----
+
+test(`There are exactly ${TOTAL_QUESTIONS} variant B questions`, () => {
+  equal(QUESTIONS_B.length, TOTAL_QUESTIONS, 'variant B count');
+});
+
+test('Every variant B question has 4 answers, one per house', () => {
+  QUESTIONS_B.forEach((q) => {
+    equal(q.answers.length, 4, `${q.id} answer count`);
+    const houses = q.answers.map((a) => a.house).sort().join();
+    equal(houses, [...HOUSES].sort().join(), `${q.id} houses`);
+  });
+});
+
+test('All 24 questions have unique question and answer ids', () => {
+  const ids = new Set();
+  [...QUESTIONS, ...QUESTIONS_B].forEach((q) => {
+    assert(!ids.has(q.id), `duplicate question id ${q.id}`);
+    ids.add(q.id);
+    q.answers.forEach((a) => {
+      assert(!ids.has(a.id), `duplicate answer id ${a.id}`);
+      ids.add(a.id);
+    });
+  });
+});
+
+test('Each slot pairs two questions from the same dimension', () => {
+  QUESTION_POOL.forEach(([a, b], slot) => {
+    equal(b.dimension, a.dimension, `slot ${slot + 1} dimension`);
+  });
+});
+
+test('Every random mix has 12 questions, two per dimension', () => {
+  for (let n = 0; n < 200; n += 1) {
+    const mix = QUESTION_POOL.map((pair) => pair[Math.random() < 0.5 ? 0 : 1]);
+    equal(mix.length, TOTAL_QUESTIONS, 'mix length');
+    const counts = {};
+    mix.forEach((q) => { counts[q.dimension] = (counts[q.dimension] || 0) + 1; });
+    Object.values(counts).forEach((c) => equal(c, 2, 'per dimension'));
+  }
+});
+
+test('Mixed quizzes score correctly, including ties', () => {
+  const mix = QUESTION_POOL.map((pair, i) => pair[i % 2]); // A, B, A, B…
+  const byHouse = (house) => mix.map((q) => q.answers.find((a) => a.house === house).id);
+  HOUSES.forEach((house) => equal(scoreAnswers(byHouse(house), mix), house, `all-${house}`));
+
+  // 3 each, ordered G H R S G H R S…: slot 12 is Slytherin, so Slytherin wins the tie.
+  const order = ['gryffindor', 'hufflepuff', 'ravenclaw', 'slytherin'];
+  const tied = mix.map((q, i) => q.answers.find((a) => a.house === order[i % 4]).id);
+  equal(scoreAnswers(tied, mix), 'slytherin', 'four-way tie');
 });
 
 // ---- Validation ----

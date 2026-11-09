@@ -83,9 +83,7 @@ function startPreview(kind, params) {
     'very-slow': () => go('verySlowLoad'),
     'welcome-back': () => go('letterArrives', { welcomeBack: welcomeBack(6, { preview: true }) }),
     'crest-missing': () => go('result', { house, preview: { active: true, crestMissing: true } }),
-    'share-copied': () => go('result', { house, preview: { active: true, share: 'copied' } }),
-    'share-offline': () => go('result', { house, preview: { active: true, share: 'offline' } }),
-    'share-blocked': () => go('result', { house, preview: { active: true, share: 'blocked' } }),
+    'screenshot-popup': () => go('result', { house, preview: { active: true, screenshotPopup: true } }),
     error: () => go('error', { preview: true }),
     result: () => go('result', { house, preview: { active: true } }),
   };

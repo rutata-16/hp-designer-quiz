@@ -141,6 +141,147 @@ export const QUESTIONS = [
   },
 ];
 
+
+// Variant B for each slot (PRD §6A). QUESTIONS_B[i] is the alternative to QUESTIONS[i]:
+// same dimension, one answer per house. Ids end in "-alt" so they never clash with variant A.
+export const QUESTIONS_B = [
+  {
+    id: 'q1-alt',
+    dimension: 'UI polish',
+    prompt: 'A developer ships your design with the spacing slightly off. You notice at 11pm. What do you do?',
+    answers: [
+      { id: 'q1-alt-a', label: 'Leave it till morning and mention it kindly. They’ve had a long week.', house: 'hufflepuff' },
+      { id: 'q1-alt-b', label: 'Raise a ticket with annotated screenshots and the exact values.', house: 'ravenclaw' },
+      { id: 'q1-alt-c', label: 'Let it ride along with the next release, alongside something that matters more.', house: 'slytherin' },
+      { id: 'q1-alt-d', label: 'Fix it in the code yourself. Asking would take longer.', house: 'gryffindor' },
+    ],
+  },
+  {
+    id: 'q2-alt',
+    dimension: 'UI polish',
+    prompt: 'Your favourite kind of design compliment is…',
+    answers: [
+      { id: 'q2-alt-a', label: '“How did you even think of that?”', house: 'gryffindor' },
+      { id: 'q2-alt-b', label: '“Leadership approved it in one meeting.”', house: 'slytherin' },
+      { id: 'q2-alt-c', label: '“This is so easy to use.”', house: 'hufflepuff' },
+      { id: 'q2-alt-d', label: '“Every pixel here is exactly where it should be.”', house: 'ravenclaw' },
+    ],
+  },
+  {
+    id: 'q3-alt',
+    dimension: 'Design process',
+    prompt: 'A stakeholder wants a brand-new feature by Friday. It’s Tuesday.',
+    answers: [
+      { id: 'q3-alt-a', label: 'Map the flow and the edge cases first, so nothing surprises you on Thursday.', house: 'ravenclaw' },
+      { id: 'q3-alt-b', label: 'Ask who it’s for and what problem it solves before opening Figma.', house: 'hufflepuff' },
+      { id: 'q3-alt-c', label: 'Sketch three rough directions tonight and show them tomorrow.', house: 'gryffindor' },
+      { id: 'q3-alt-d', label: 'Negotiate it down to something that can actually ship well by Friday.', house: 'slytherin' },
+    ],
+  },
+  {
+    id: 'q4-alt',
+    dimension: 'Design process',
+    prompt: 'After a workshop, your sticky notes are…',
+    answers: [
+      { id: 'q4-alt-a', label: 'Quietly narrowed down to the three that will win the room at the readout.', house: 'slytherin' },
+      { id: 'q4-alt-b', label: 'Everywhere. Some on the wall, one on your laptop, one possibly on your shoe.', house: 'gryffindor' },
+      { id: 'q4-alt-c', label: 'Already clustered, labelled and colour-coded by theme.', house: 'ravenclaw' },
+      { id: 'q4-alt-d', label: 'Photographed and shared with everyone who came, with a thank-you.', house: 'hufflepuff' },
+    ],
+  },
+  {
+    id: 'q5-alt',
+    dimension: 'Figma love',
+    prompt: 'Someone sends you a file with 40 unnamed layers called “Frame 2847”.',
+    answers: [
+      { id: 'q5-alt-a', label: 'Start a fresh file. Untangling it would take longer than rebuilding.', house: 'gryffindor' },
+      { id: 'q5-alt-b', label: 'Use it as the perfect case for finally funding a proper design system.', house: 'slytherin' },
+      { id: 'q5-alt-c', label: 'Kindly send them a short guide to naming and auto layout.', house: 'hufflepuff' },
+      { id: 'q5-alt-d', label: 'Rename them. All of them. It’s calming.', house: 'ravenclaw' },
+    ],
+  },
+  {
+    id: 'q6-alt',
+    dimension: 'Figma love',
+    prompt: 'Your plugins list looks like…',
+    answers: [
+      { id: 'q6-alt-a', label: 'Whatever the team uses, so everyone’s files behave the same way.', house: 'hufflepuff' },
+      { id: 'q6-alt-b', label: 'Small and deeply understood. You know exactly what each one does to your layers.', house: 'ravenclaw' },
+      { id: 'q6-alt-c', label: 'Whatever gets you from brief to sign-off fastest. The rest get uninstalled.', house: 'slytherin' },
+      { id: 'q6-alt-d', label: 'Forty plugins, mostly tried once, two used daily.', house: 'gryffindor' },
+    ],
+  },
+  {
+    id: 'q7-alt',
+    dimension: 'Expertise',
+    prompt: 'At a design conference, which talk do you pick?',
+    answers: [
+      { id: 'q7-alt-a', label: 'Something completely outside design. Robotics? Perfumery? Yes.', house: 'gryffindor' },
+      { id: 'q7-alt-b', label: 'A deep dive into one niche topic you already know a lot about.', house: 'ravenclaw' },
+      { id: 'q7-alt-c', label: 'How a design leader earned a seat at the table.', house: 'slytherin' },
+      { id: 'q7-alt-d', label: 'Designing for the people products usually leave out.', house: 'hufflepuff' },
+    ],
+  },
+  {
+    id: 'q8-alt',
+    dimension: 'Expertise',
+    prompt: 'A junior designer asks for career advice. You tell them…',
+    answers: [
+      { id: 'q8-alt-a', label: '“Talk to users and engineers. Often.”', house: 'hufflepuff' },
+      { id: 'q8-alt-b', label: '“Learn how the business makes money, then design for that.”', house: 'slytherin' },
+      { id: 'q8-alt-c', label: '“Try everything. You’ll find your thing by doing.”', house: 'gryffindor' },
+      { id: 'q8-alt-d', label: '“Pick one thing and get really, really good at it.”', house: 'ravenclaw' },
+    ],
+  },
+  {
+    id: 'q9-alt',
+    dimension: 'Taste',
+    prompt: 'You walk into a beautifully designed café. What do you notice first?',
+    answers: [
+      { id: 'q9-alt-a', label: 'The typeface on the menu. You may have already identified it.', house: 'ravenclaw' },
+      { id: 'q9-alt-b', label: 'How they get people to queue happily for overpriced coffee.', house: 'slytherin' },
+      { id: 'q9-alt-c', label: 'Three ideas you want to steal for something completely unrelated.', house: 'gryffindor' },
+      { id: 'q9-alt-d', label: 'Whether the menu is easy to read and the staff seem happy.', house: 'hufflepuff' },
+    ],
+  },
+  {
+    id: 'q10-alt',
+    dimension: 'Taste',
+    prompt: 'Someone calls your work “clean”. You feel…',
+    answers: [
+      { id: 'q10-alt-a', label: 'Pleased, if it means it was easy to understand.', house: 'hufflepuff' },
+      { id: 'q10-alt-b', label: 'Curious what they meant exactly. Spacing? Hierarchy? Restraint?', house: 'ravenclaw' },
+      { id: 'q10-alt-c', label: 'Fine, as long as clean is what the brief needed.', house: 'slytherin' },
+      { id: 'q10-alt-d', label: 'Suspicious. “Clean” is what people say when there’s no personality.', house: 'gryffindor' },
+    ],
+  },
+  {
+    id: 'q11-alt',
+    dimension: 'AI',
+    prompt: 'A colleague’s AI-generated design wins the review. You…',
+    answers: [
+      { id: 'q11-alt-a', label: 'Note that the review rewarded results, not methods, and adjust accordingly.', house: 'slytherin' },
+      { id: 'q11-alt-b', label: 'Check whether it actually works for the people who’ll use it.', house: 'hufflepuff' },
+      { id: 'q11-alt-c', label: 'Ask them to walk you through their prompts. Immediately.', house: 'gryffindor' },
+      { id: 'q11-alt-d', label: 'Look closely at what it got right, and what it quietly got wrong.', house: 'ravenclaw' },
+    ],
+  },
+  {
+    id: 'q12-alt',
+    dimension: 'AI',
+    prompt: 'If AI could take one part of your job forever, you’d hand over…',
+    answers: [
+      { id: 'q12-alt-a', label: 'Every boring task, so you can try ten more ideas a week.', house: 'gryffindor' },
+      { id: 'q12-alt-b', label: 'Redlines and specs. You’d keep the actual craft.', house: 'ravenclaw' },
+      { id: 'q12-alt-c', label: 'Note-taking in research sessions, so you can properly listen.', house: 'hufflepuff' },
+      { id: 'q12-alt-d', label: 'Rewriting the same deck for the fifth audience.', house: 'slytherin' },
+    ],
+  },
+];
+
+/** QUESTION_POOL[slot] = [variant A, variant B]. */
+export const QUESTION_POOL = QUESTIONS.map((q, i) => [q, QUESTIONS_B[i]]);
+
 export const RESULTS = {
   gryffindor: {
     house: 'gryffindor',
@@ -248,16 +389,24 @@ export const COPY = {
     superpowerLabel: 'Your superpower',
     flawLabel: 'Your designer flaw',
     habitLabel: 'Your design habit',
-    share: 'Share my house',
+    share: 'Take a screenshot',
     restart: 'Sort me again',
     crestPending: 'The crest is still on its way by owl',
     shareText: (name, subheading, url) => `I’m a ${name} designer: ‘${subheading}’ Get sorted: ${url}`,
   },
 
-  toasts: {
-    copied: 'Copied! Now send it by owl (or Slack).',
-    offline: 'No owls flying right now (you’re offline). We copied your result instead.',
-    blocked: 'Your browser wouldn’t let us copy. A screenshot works just as well.',
+    toasts: {
+    linkCopied: 'Link copied. Send it by owl.',
+    linkBlocked: 'Your browser wouldn’t let us copy. The address bar works too.',
+  },
+
+  screenshotPopup: {
+    title: 'This potion is still brewing!',
+    body: 'A proper result card is on its way. Until then, the old-fashioned spell works best:',
+    shortcuts: ['Cmd + Shift + 4 (Mac)', 'Win + Shift + S (Windows)'],
+    image: 'assets/cauldron.png',
+    close: 'Got it',
+    copyLink: 'Copy quiz link',
   },
 
   slowLoad: {

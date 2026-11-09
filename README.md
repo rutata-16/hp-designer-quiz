@@ -36,11 +36,11 @@ The `design-reference/` folder (Figma exports, PRD, original images) isn't used 
 | 02 | Letter opened | Parchment letter; “Get sorted” starts the quiz. |
 | 03 | Question × 12 | One question per screen, 12-segment progress, Back, no Next button. Picking an answer advances after ~300ms. |
 | 04 | Sorting moment | Hat, four house-colour orbs on a slowly turning ring, one random sorting line typed out, thinking dots, then the result after ~3s. |
-| 05 | Result | One layout for all four houses, themed by `[data-house]`. Share + Sort me again. |
+| 05 | Result | One layout for all four houses, themed by `[data-house]`. Take a screenshot + Sort me again. |
 | E1a / E1b | Slow / really slow load | Shown after 3s / 10s if fonts and the parchment aren’t ready. The letter still appears by itself once loading finishes. |
 | E2 | Welcome back | Modal over a dimmed screen 01 when an unfinished quiz is in `sessionStorage`. |
 | E3 | Crest slow or failed | A dashed shield with the house initial shows immediately; the crest fades in over it. |
-| E4 | Sharing | Native share sheet where available; otherwise copy + toast (copied / offline / blocked). |
+| E4 | Screenshot popup | "Take a screenshot" opens "This potion is still brewing!" with keyboard shortcuts and "Copy quiz link". |
 | E5 | Something went wrong | Catches `error`, `unhandledrejection` and screen render failures. |
 
 ### Files
@@ -52,7 +52,7 @@ js/    icons · data · scoring · store · components · router · screens · t
 assets/ hat.png · parchment.jpg · crests/<house>.jpg
 ```
 
-- **`js/data.js`** holds every question, answer, mapping, result and line of screen copy.
+- - **`js/data.js`** holds every question (24: `QUESTIONS` + `QUESTIONS_B`), answer, mapping, result and line of screen copy.
 - **`js/scoring.js`** is a pure function implementing PRD §7. Each answer gives one point to its house. A tie goes to the tied house picked at Q12; if Q12 isn't one of them, it checks Q11, then Q10, and so on.
 - **`js/store.js`** keeps answers in `sessionStorage`, falling back silently to memory. A refresh mid-quiz offers to resume.
 - **`css/variables.css`** holds every colour, size, radius, shadow and duration. No other stylesheet hard-codes them.
@@ -84,9 +84,7 @@ Add `?preview=<value>` to the URL. Previews only change what's shown and never t
 | `very-slow` | E1b · The owl is taking the scenic route |
 | `welcome-back` | E2 · Welcome back, with 6 fake answers |
 | `crest-missing` | E3 · Result with the shield outline and “on its way by owl” caption |
-| `share-copied` | E4 · Result + “Copied!” toast |
-| `share-offline` | E4 · Result + offline toast |
-| `share-blocked` | E4 · Result + copy-blocked toast |
+| `screenshot-popup` | E4 · Result with the brewing-potion popup open |
 | `error` | E5 · Something went wrong |
 | `result` | Any result without taking the quiz |
 

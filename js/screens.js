@@ -81,7 +81,7 @@ export function letterOpened() {
 export function question({ index = 0 } = {}) {
   // Never skip ahead of the first unanswered question (FR-05).
   const i = Math.min(Math.max(0, index), store.firstUnanswered());
-  const q = QUESTIONS[i];
+  const q = store.questions()[i];
   const c = COPY.question;
   const titleId = nextId('question-title');
 
@@ -188,16 +188,16 @@ export function sorting() {
 // ==========================================================================
 
 export function result({ house = null, preview = {} } = {}) {
-  const h = house ?? scoreAnswers(store.answers());
+  const h = house ?? scoreAnswers(store.answers(), store.questions());
   const r = RESULTS[h];
   const c = COPY.result;
   const titleId = nextId('result-title');
 
   if (!preview.active) store.markFinished();
 
-  const share = button({
+    const share = button({
     label: c.share,
-    onClick: () => shareResult(r, preview.share),
+    onClick: () => openScreenshotPopup(node, share),
   });
 
   const restart = button({
@@ -237,53 +237,52 @@ export function result({ house = null, preview = {} } = {}) {
     atmosphere: 'result',
     house: h,
     footer: 'long',
-    onShow: () => {
-      if (preview.share) showShareToast(preview.share);
+        onShow: () => {
+      if (preview.screenshotPopup) openScreenshotPopup(node, share);
     },
   };
 }
 
-/** E4: native share sheet first, clipboard fallback, friendly toasts. */
-async function shareResult(r, forced) {
-  if (forced) {
-    showShareToast(forced);
-    return;
-  }
+/** E4: "Take a screenshot" opens the brewing-potion popup. */
+function openScreenshotPopup(screen, trigger) {
+  const p = COPY.screenshotPopup;
+  const footer = document.querySelector('[data-disclaimer]');
+  let modal = null;
 
-  const url = shareUrl();
-  const text = COPY.result.shareText(r.name, r.subheading, url);
+  const shut = () => {
+    modal.node.remove();
+    trigger.focus();
+  };
 
-  if (typeof navigator.share === 'function') {
-    try {
-      await navigator.share({ title: COPY.appName, text });
-      return;
-    } catch (err) {
-      if (err && err.name === 'AbortError') return; // user closed the sheet
-      // Otherwise fall through to copying.
-    }
-  }
+  modal = dialog({
+    title: p.title,
+    body: p.body,
+    list: p.shortcuts,
+    image: p.image,
+    primary: { label: p.close, onClick: shut },
+    secondary: { label: p.copyLink, onClick: () => { shut(); copyQuizLink(); } },
+    onEscape: shut,
+    dismissOnDim: true,
+    inertTargets: [...screen.children, footer].filter(Boolean),
+  });
 
+  screen.append(modal.node);
+  modal.focus();
+}
+
+async function copyQuizLink() {
   try {
     if (!navigator.clipboard || !window.isSecureContext) throw new Error('No clipboard');
-    await navigator.clipboard.writeText(text);
-    showShareToast(navigator.onLine === false ? 'offline' : 'copied');
+    await navigator.clipboard.writeText(shareUrl());
+    showToast({ text: COPY.toasts.linkCopied, icon: 'check' });
   } catch {
-    showShareToast('blocked');
+    showToast({ text: COPY.toasts.linkBlocked, icon: 'sparkle' });
   }
 }
 
 function shareUrl() {
   const { origin, pathname } = window.location;
   return `${origin}${pathname.replace(/(index|404)\.html$/, '')}`;
-}
-
-function showShareToast(kind) {
-  const map = {
-    copied: { text: COPY.toasts.copied, icon: 'check' },
-    offline: { text: COPY.toasts.offline, icon: 'letter' },
-    blocked: { text: COPY.toasts.blocked, icon: 'sparkle' },
-  };
-  if (map[kind]) showToast(map[kind]);
 }
 
 // ==========================================================================

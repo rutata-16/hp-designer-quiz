@@ -362,23 +362,36 @@ export function showToast({ text, icon }) {
  * Modal dialog. Focus starts on the primary action, Tab is trapped,
  * Escape runs `onEscape`. Everything in `inertTargets` is made inert.
  */
-export function dialog({ title, body, primary, secondary, onEscape, inertTargets = [] }) {
+export function dialog({
+  title, body, list = [], image = null, primary, secondary, onEscape,
+  dismissOnDim = false, inertTargets = [],
+}) {
   const titleId = nextId('dialog-title');
   const bodyId = nextId('dialog-body');
 
   const primaryBtn = button({ label: primary.label, onClick: () => close(primary.onClick) });
   const secondaryBtn = button({ label: secondary.label, variant: 'text', onClick: () => close(secondary.onClick) });
 
-  const card = el('div', {
-    class: 'dialog__card surface-light',
-    attrs: { role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': titleId, 'aria-describedby': bodyId },
-  }, [
+  const content = [
     heading(title, 'dialog__title', { id: titleId, focusable: false }),
-    el('p', { class: 'dialog__body', text: body, attrs: { id: bodyId } }),
-    actions([primaryBtn, secondaryBtn], 'actions--center'),
-  ]);
+    el('div', { attrs: { id: bodyId } }, [
+      el('p', { class: 'dialog__body', text: body }),
+      list.length ? el('ul', { class: 'dialog__list' }, list.map((item) => el('li', { text: item }))) : null,
+    ]),
+    actions([primaryBtn, secondaryBtn], image ? 'dialog__actions' : 'actions--center'),
+  ];
 
-  const node = el('div', { class: 'dialog' }, [el('div', { class: 'dialog__dim' }), card]);
+  const card = el('div', {
+    class: image ? 'dialog__card dialog__card--art surface-light' : 'dialog__card surface-light',
+    attrs: { role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': titleId, 'aria-describedby': bodyId },
+  }, image
+    ? [el('img', { class: 'dialog__art', attrs: { src: image, alt: '' } }), el('div', { class: 'dialog__content' }, content)]
+    : content);
+
+  const dim = el('div', { class: 'dialog__dim' });
+  if (dismissOnDim) dim.addEventListener('click', () => close(onEscape));
+
+  const node = el('div', { class: 'dialog' }, [dim, card]);
 
   inertTargets.forEach((t) => { t.inert = true; });
 

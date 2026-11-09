@@ -612,6 +612,49 @@
   margin-top: var(--space-8);
 }
 
+/* Dialog with artwork on the left (E4 screenshot popup) */
+.dialog__card--art {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-40);
+  width: min(var(--dialog-w-art), 100%);
+  padding: var(--space-24) var(--space-48) var(--space-24) var(--space-24);
+  text-align: left;
+}
+
+.dialog__art {
+  width: var(--dialog-art-w);
+  height: auto;
+  flex-shrink: 0;
+}
+
+.dialog__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-16);
+}
+
+.dialog__card--art .dialog__title {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.dialog__card--art .dialog__body {
+  max-width: none;
+}
+
+.dialog__list {
+  list-style: disc;
+  padding-left: 1.25em;
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+}
+
+.dialog__actions {
+  justify-content: flex-start;
+}
+
 /* ==========================================================================
    Toast
    ========================================================================== */
